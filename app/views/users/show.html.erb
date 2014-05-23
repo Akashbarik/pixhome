@@ -1,0 +1,41 @@
+	<% if session[:user_id] != @user.id %>
+	 <% if User.find_by_id(session[:user_id]).hasFollowedHim(@user.id) %>
+      
+        <a href="/follows/destroy/<%=@user.id%>" class="button red">
+            Unfollow
+        </a>
+      
+    <% else %>
+      
+        <a href="/follows/new/<%=@user.id%>" class="button blue">
+            Follow
+        </a>
+      
+    <% end %>
+    <% end %>
+
+
+
+    <% if @pictures != nil%>
+      <% for @picture in @pictures %>
+        <div>
+            <a href="/photos/<%=@picture.id%>">
+              <div style="text-align:center;">
+              <%= image_tag @picture.image_url().to_s,:style=>'height:400px; width:600px; margin:2%; margin-top:0; border:30px solid rgba(2,80,2,0.6); border-radius:3%;'%>
+              </div>
+            </a>
+        </div>
+      <% end %>
+    <% end %>
+
+<!--insideboxmiddle-->
+
+<script > 
+var $container = $('#container');
+$container.imagesLoaded(function(){
+  $container.masonry({
+    itemSelector : '.item',
+    columnWidth : 240
+  });
+});
+</script>
