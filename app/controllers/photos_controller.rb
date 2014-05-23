@@ -20,6 +20,8 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @user = User.find_by_id(session[:user_id])
+
     @photo = Photo.find(params[:id])
     @comments = Comment.where(:photo_id => params[:id])
     
@@ -43,6 +45,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
+    @user = User.find_by_id(session[:user_id])
     @photo = Photo.find(params[:id])
   end
 
